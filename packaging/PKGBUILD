@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=oonaa-bin
+_pkgname=oonaa
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Enforces zero ambient authentication, requiring explicit credential passing."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/oonaa"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('oonaa')
+conflicts=('oonaa')
+source_x86_64=("${url}/releases/download/v${pkgver}/oonaa-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/oonaa-linux-x86_64" "${pkgdir}/usr/bin/oonaa"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/oonaa-uninstall"
+}
